@@ -1,5 +1,5 @@
 # base image
-FROM node:9
+FROM node:9-alpine
 
 # set working directory
 WORKDIR /usr/src/app
@@ -13,7 +13,15 @@ ENV PATH="${PATH}:/usr/src/app/node_modules/.bin/"
 
 COPY ./client .
 
-EXPOSE 3000
+RUN npm run build
+
+
+FROM node:9-alpine
+WORKDIR /usr/src/app
+RUN npm install serve -g
+COPY --from=0 /usr/src/app/build ./
+
+EXPOSE 5000
 
 # start app
-CMD ["npm", "start"]
+CMD ["serve"]

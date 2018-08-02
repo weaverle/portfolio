@@ -1,11 +1,11 @@
 version: '3'
 services:
   lauren-weaver:
-    container_name: laren-weaver
-    image: laren-weaver
+    container_name: lauren-weaver
+    image: lauren-weaver
     build:
       context: .
-      dockerfile: ./client/Dockerfile
+      dockerfile: ./Dockerfile.dev
     volumes:
       - './client:/usr/src/app'
       - '/usr/src/app/node_modules'
